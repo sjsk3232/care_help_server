@@ -26,7 +26,8 @@ export async function POST(req: Request) {
   const postType = String(form.get("postType") || "");
   const title = String(form.get("title") || "");
   const writer = "관리자";
-  const content = String(form.get("content") || "");
+  let content = String(form.get("content") || "");
+  content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
 
   const Model: any = pickModel(postType);
   if (!Model)
